@@ -14,7 +14,7 @@
           </div>
 
           <div [hidden]="old_question" class="answers">
-            <!-- <span class="new">New</span> -->
+            <span class="new">New</span>
             <mat-radio-group
               aria-labelledby="example-radio-group-label"
               class="example-radio-group" [(ngModel)]="answer">
@@ -27,7 +27,7 @@
           </div >
 
           <div [hidden]="!old_question" class="answers">
-            <!-- <span class="old">Old</span> -->
+            <span class="old">Old</span>
             <mat-radio-group
               aria-labelledby="example-radio-group-label"
               class="example-radio-group" [(ngModel)]="answer">
