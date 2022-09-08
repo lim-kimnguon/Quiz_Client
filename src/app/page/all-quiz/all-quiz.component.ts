@@ -12,7 +12,7 @@ export class AllQuizComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  quizs= [
+  quizzes= [
     {
       "name":"Web Application Quizzes(HTML)",
       "description":"Do you know the difference between software and a web browser? Can you tell the differences between tech-speak and programming languages? So you are a computer whiz and know all there is to know about web"

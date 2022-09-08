@@ -3,7 +3,7 @@
     ALLWEB QUIZ
   </div>
   <div class="quiz">
-    <mat-card class="card_cont" *ngFor="let quiz of quizs; let i=index;">
+    <mat-card class="card_cont" *ngFor="let quiz of quizzes; let i=index;">
       <div class="image">
         <img
           src="https://thumbs.dreamstime.com/b/male-hand-holding-megaphone-quiz-time-speech-bubble-loudspeaker-banner-business-marketing-advertising-vector-125104939.jpg"
@@ -22,8 +22,7 @@
           Duration: <span>60</span>minutes
         </div>
         <div class="button-container">
-          <!-- <button mat-raised-button>Contact Us</button> -->
-          <button mat-raised-button color="primary">Start Quiz</button>
+          <button mat-raised-button color="primary" routerLink="/quiz">Start Quiz</button>
         </div>
       </div>
     </mat-card>

@@ -21,6 +21,7 @@ import { StartPageComponent } from './page/start-page/start-page.component';
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { RuleComponent } from './component/rule/rule.component';
+import { Quiz2Component } from './component/quiz2/quiz2.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { RuleComponent } from './component/rule/rule.component';
     StartPageComponent,
     LoginComponent,
     RegisterComponent,
-    RuleComponent
+    RuleComponent,
+    Quiz2Component
   ],
   imports: [
     BrowserModule,

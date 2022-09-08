@@ -4,11 +4,11 @@ import { ApiService } from 'src/app/service/api.service';
 import * as $ from "jquery";
 
 @Component({
-  selector: 'app-quiz',
-  templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.css']
+  selector: 'app-quiz2',
+  templateUrl: './quiz2.component.html',
+  styleUrls: ['./quiz2.component.css']
 })
-export class QuizComponent implements OnInit {
+export class Quiz2Component implements OnInit {
 
   answer = 0;
   quiz !: Quiz;
@@ -24,10 +24,6 @@ export class QuizComponent implements OnInit {
   question_answers: any = [];
   old_question : boolean = false;
   timeOut : number = 10;
-
-  total_time : number = 120; // (in minutes)
-  // var hour = Math.floor(totalTimeInMinutes / 60); //1h
-  // var minutes = totalTimeInMinutes - (hour * 60); //30m
 
   constructor(
     private api : ApiService,
@@ -203,5 +199,6 @@ export class QuizComponent implements OnInit {
     setTimeout(() => {
     }, delay*1000);
   }
+
 
 }

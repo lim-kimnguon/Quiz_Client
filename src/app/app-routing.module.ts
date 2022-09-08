@@ -1,3 +1,4 @@
+import { Quiz2Component } from './component/quiz2/quiz2.component';
 import { FinishPageComponent } from './page/finish-page/finish-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path : 'all-quiz', component: AllQuizComponent },
   { path : 'rule', component: RuleComponent },
   { path : 'finish-page', component: FinishPageComponent},
+  { path : 'open-question-quiz', component: Quiz2Component},
   { path:  '**' , component: HomeComponent  }
 ];
 
