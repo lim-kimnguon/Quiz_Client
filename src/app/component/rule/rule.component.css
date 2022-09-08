@@ -1,0 +1,104 @@
+.role{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5vh 0px;
+}
+.title{
+  width: 100%;
+  margin: 0px 0px 5vh 0px;
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+.container{
+  width: 80%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0,0.5);
+  margin: 2vw 0vw ;
+  padding: 0px;
+  margin: auto;
+}
+.container-card{
+  margin: 60px 20px ;
+  padding: 30px 10px 5px 10px;
+  border: none;
+
+}
+.container-card .name{
+  margin-left: 2vw ;
+}
+.container:hover{
+  box-shadow: 0px 0px 10px rgb(55, 80, 165);
+}
+.join_btn:hover{
+  color:"accent";
+}
+.answer{
+  font-size: 1.2em;
+  margin-left: 4vw ;
+}
+.timeleft{
+  width: 20%;
+}
+.time{
+  font-size: 1.2em;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+.example-full-width {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.buttom_toolbar{
+  width: 100%;
+  /* background-color: rgb(216, 191, 48); */
+  /* background: rgb(6,133,173);
+  background: linear-gradient(90deg, rgba(6,133,173,1) 0%, rgba(0,254,255,1) 100%); */
+  background: rgb(6,133,173);
+  background: linear-gradient(90deg, rgba(6,133,173,1) 0%, rgba(0,241,255,1) 100%);
+  margin-top: 2vw;
+}
+
+.buttom_toolbar .btn{
+  height: auto;
+  width: auto;
+  margin: 0.5vw;
+  font-size: 0.7em;
+  border-radius: 3vh;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.space-btn{
+  margin: 0px 0.5vw;
+}
+
+
+.ans-option {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5px 0;
+  align-items: flex-start;
+}
+.ans-option .option{
+  /* border: 1px solid bisque; */
+  width: 77%;
+  margin: 0.5vh 0vw;
+  padding: 0.3vw 0.3vw;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}

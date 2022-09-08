@@ -1,0 +1,31 @@
+<div class="container">
+  <mat-toolbar>
+    <img class="img" src="../../../assets/img/allweb.png" alt="">
+    <span class="example-spacer"></span>
+    <div class="menu" >
+      <a routerLink="/home" mat-button>Home</a>
+      <a routerLink="/quiz" mat-button>Start Quiz</a>
+      <a routerLink="/rule" mat-button>Quiz Rules</a>
+      <a routerLink="/home" mat-button>Contact</a>
+      <a routerLink="/home" mat-button>About Us</a>
+    </div>
+    <span class="example-spacer"></span>
+    <div class="row mr-2 ml-auto">
+      <button mat-button [matMenuTriggerFor]="menu" class="user mt-2 d-flex align-items-center">
+        <mat-icon>account_circle</mat-icon>
+          User Name
+        <mat-icon class="user-image-icon ml-1">
+          keyboard_arrow_down
+        </mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon>
+          Logout
+        </button>
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+</div>
+
