@@ -31,7 +31,7 @@ export class QuizComponent implements OnInit {
   // var minutes = totalTimeInMinutes - (hour * 60); //30m
 
 
-  times: number = 125;
+  seconds: number = 3600;
   interval : any;
 
   constructor(
@@ -49,34 +49,49 @@ export class QuizComponent implements OnInit {
   }
 
   startTimer() {
-    console.log("=====>");
     this.interval = setInterval(() => {
-      if (this.time === 0) {
-        this.time++;
+      if (this.seconds === 0) {
+        this.seconds--;
       } else {
-        this.time++;
+        this.seconds--;
       }
     }, 1000);
   }
 
   transform(value: number, args?: any): string | any {
 
-    const hours: number = Math.floor(value / 60);
-    const minutes: number = (value - hours * 60);
-    // const seconds: number = minutes * 60;
+    // const hours: number = Math.floor(value / 60);
+    // const minutes: number = (value - hours * 60);
 
-    if (hours < 10 && minutes < 10) {
-        return '0' + hours + ':0' + (value - hours * 60);
+    // if (hours < 10 && minutes < 10) {
+    //     return '0' + hours + ':0' + (value - hours * 60);
+    // }
+    // if (hours > 10 && minutes > 10) {
+    //     return hours + ':' + (value - hours * 60);
+    // }
+    // if (hours > 10 && minutes < 10) {
+    //     return hours + ':0' + (value - hours * 60);
+    // }
+    // if (hours < 10 && minutes > 10) {
+    //     return '0' + hours + ':' + (value - hours * 60);
+    // }
+    // return hours + ':' + (value - hours * 60);
+    const minutes: number = Math.floor(value / 60);
+    const seconds: number = (value - minutes * 60);
+
+    if (minutes < 10 && seconds < 10) {
+        return '0' + minutes + ':0' + (value - minutes * 60);
     }
-    if (hours > 10 && minutes > 10) {
-        return '0' + hours + ':' + (value - hours * 60);
+    if (minutes > 10 && seconds > 10) {
+        return minutes + ':' + (value - minutes * 60);
     }
-    if (hours > 10 && minutes < 10) {
-        return hours + ':0' + (value - hours * 60);
+    if (minutes > 10 && seconds < 10) {
+        return minutes + ':0' + (value - minutes * 60);
     }
-    if (minutes > 10) {
-        return '0' + hours + ':' + (value - hours * 60);
+    if (minutes < 10 && seconds > 10) {
+        return '0' + minutes + ':' + (value - minutes * 60);
     }
+    return minutes + ':' + (value - minutes * 60);
   }
 
   getQuiz() {
@@ -86,7 +101,7 @@ export class QuizComponent implements OnInit {
 
         this.startTimer()
         this.delayTime(2);
-        this.startCounter();
+        // this.startCounter();
         this.quiz = data;
         console.log(this.quiz.questions[this.current_question].questionType.name);
         this.quizTitle = this.quiz.name;
@@ -115,16 +130,16 @@ export class QuizComponent implements OnInit {
 
     if(this.current_question < this.questionList.length-1) {
       clearInterval(this.time)
-      this.startCounter();
+      // this.startCounter();
     } else {
       clearInterval(this.time)
-      this.startCounter();
+      // this.startCounter();
 
-        if(this.current_question < this.questionList.length) {
-          $(".next").hide();
-          $(".submit").show();
-          this.question_answers.push
-        }
+        // if(this.current_question < this.questionList.length) {
+        //   $(".next").hide();
+        //   $(".submit").show();
+        //   // this.question_answers.push
+        // }
     }
 
     if(this.counter == 0) {
@@ -188,11 +203,10 @@ export class QuizComponent implements OnInit {
   }
 
   clearOldAnswerId() {
-
-      if(this.question_answers[this.current_question-1].answerId == this.question_answers[this.current_question-2].answerId) {
-        this.question_answers[this.current_question-1].answerId = 0;
-        console.log("answer");
-      }
+    if(this.question_answers[this.current_question-1].answerId == this.question_answers[this.current_question-2].answerId) {
+      this.question_answers[this.current_question-1].answerId = 0;
+      console.log("answer");
+    }
   }
 
   checkQuestion(answer_id : number) {

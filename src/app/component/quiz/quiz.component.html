@@ -3,7 +3,7 @@
       <mat-card-header class="header">
         <mat-card-title>{{quizTitle}}</mat-card-title>
         <span class="spacer"></span>
-        <span class="time"> Time {{transform(times)}} <mat-icon>access_alarms</mat-icon> </span>
+        <span class="time"> {{transform(seconds)}} <mat-icon>access_alarms</mat-icon> </span>
       </mat-card-header>
 
       <mat-card-content class="content" >
@@ -46,8 +46,8 @@
         <span class="spacer"></span>
         <span class="text">Question {{current_question +1 }} of {{questionList.length}} </span>
         <span class="spacer"></span>
-        <button mat-raised-button class="next" (click)="nextQuestion()"> Next <mat-icon>keyboard_arrow_right</mat-icon></button>
-        <button mat-raised-button class="submit" routerLink="/finish-page" (click)="submitQuestion()"> Submit <mat-icon>done_outline</mat-icon></button>
+        <button mat-raised-button class="next" (click)="(current_question < questionList.length - 1) ? nextQuestion() : submitQuestion()"> {{ (current_question < questionList.length - 1) ? "Next" : "Submit" }} <mat-icon>keyboard_arrow_right</mat-icon></button>
+        <!-- <button mat-raised-button class="submit" routerLink="/finish-page" (click)="submitQuestion()"> Submit <mat-icon>done_outline</mat-icon></button> -->
       </mat-toolbar>
     </mat-card>
   </div>

@@ -1,5 +1,5 @@
 export interface QuestionDetailsResponse {
-  question: string;
+  question: any;
   options: Array<string>;
 }
 
