@@ -1,0 +1,47 @@
+<!-- <p>quiz-test works!</p> -->
+<div class="container">
+  <div cdkDropListGroup class="sub-container">
+    <div class="question-container">
+      <h3>Question</h3>
+      <div class="question">
+        <ng-container
+        *ngFor="let part of questionDetails.questions; trackBy: trackByMethod; let i = index"
+      >
+        {{part}}
+        <span
+          cdkDropList
+          [cdkDropListData]="questionDetails.answers[i]"
+          class="example-list"
+          id="QUESTION_{{i}}"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <span class="example-box" cdkDrag>{{questionDetails.answers[i][0]}}</span>
+        </span>
+      </ng-container
+      >
+      </div>
+
+    </div>
+
+    <div class="example-container">
+      <h3>Options</h3>
+
+      <div class="answer"
+        cdkDropList
+        [cdkDropListData]="questionDetails.options"
+        class="example-list"
+        id="OPTION"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="example-box"
+          *ngFor="let option of questionDetails.options"
+          cdkDrag
+        >
+          {{option}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

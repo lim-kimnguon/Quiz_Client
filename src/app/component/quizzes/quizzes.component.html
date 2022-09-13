@@ -1,0 +1,71 @@
+<div class="card-container">
+  <mat-card class="example-card">
+    <mat-card-header class="header">
+      <mat-card-title>Gaps</mat-card-title>
+      <span class="spacer"></span>
+      <span class="time"> Time {{display}} <mat-icon>access_alarms</mat-icon> </span>
+    </mat-card-header>
+
+    <mat-card-content class="content">
+      <div class="body">
+
+        <div class="title">
+          <!-- 1. {{questions}} -->
+          <div [innerHtml]="new_question" class="droppable"></div>
+        </div>
+
+        <!-- <div class="answers" *ngFor="let blank of blanks">
+          <div class="example-box" cdkDrag (click)="details()">
+            {{blank.name}}
+          </div>
+        </div> -->
+
+        <div cdkDropListGroup>
+          <div class="example-container">
+
+            <div
+              cdkDropList
+              [cdkDropListData]="todo"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+            </div>
+          </div>
+
+          <div class="example-container">
+
+            <div
+              cdkDropList
+              [cdkDropListData]="done"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </mat-card-content>
+
+    <!-- <mat-toolbar color="accent" class="footer">
+      <button [disabled]="current_question === 0" mat-raised-button class="previous" (click)="previousQuestion()" ><mat-icon>keyboard_arrow_left</mat-icon> Previous </button>
+      <span class="spacer"></span>
+      <span class="text">Question {{current_question +1 }} of {{questionList.length}} </span>
+      <span class="spacer"></span>
+      <button mat-raised-button class="next" (click)="nextQuestion()"> Next <mat-icon>keyboard_arrow_right</mat-icon></button>
+      <button mat-raised-button class="submit" routerLink="/finish-page" (click)="submitQuestion()"> Submit <mat-icon>done_outline</mat-icon></button>
+    </mat-toolbar> -->
+    <mat-toolbar color="accent" class="footer">
+      <button [disabled]="current_question === 0" mat-raised-button class="previous">
+        <mat-icon>keyboard_arrow_left</mat-icon> Previous
+      </button>
+      <span class="spacer"></span>
+      <span class="text">Question 1 of 5 </span>
+      <span class="spacer"></span>
+      <button mat-raised-button class="next"> Next <mat-icon>keyboard_arrow_right</mat-icon></button>
+      <button mat-raised-button class="submit" routerLink="/finish-page"> Submit <mat-icon>done_outline</mat-icon>
+        </button>
+    </mat-toolbar>
+  </mat-card>
+</div>

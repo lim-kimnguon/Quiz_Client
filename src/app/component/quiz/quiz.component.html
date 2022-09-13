@@ -3,7 +3,7 @@
       <mat-card-header class="header">
         <mat-card-title>{{quizTitle}}</mat-card-title>
         <span class="spacer"></span>
-        <span class="time"> Time {{counter}}s <mat-icon>access_alarms</mat-icon> </span>
+        <span class="time"> Time {{transform(times)}} <mat-icon>access_alarms</mat-icon> </span>
       </mat-card-header>
 
       <mat-card-content class="content" >
@@ -24,7 +24,6 @@
                 {{answer.name}}
               </mat-radio-button>
             </mat-radio-group>
-            
           </div >
 
           <div [hidden]="!old_question" class="answers">

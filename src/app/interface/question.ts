@@ -3,5 +3,5 @@ export interface Question {
   id :  number;
   name : string;
   answer: Answer[];
-  type : string;
+  questionType : any;
 }

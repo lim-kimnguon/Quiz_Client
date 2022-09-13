@@ -22,6 +22,9 @@ import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { RuleComponent } from './component/rule/rule.component';
 import { Quiz2Component } from './component/quiz2/quiz2.component';
+import { QuizzesComponent } from './component/quizzes/quizzes.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { QuizTestComponent } from './component/quiz-test/quiz-test.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { Quiz2Component } from './component/quiz2/quiz2.component';
     LoginComponent,
     RegisterComponent,
     RuleComponent,
-    Quiz2Component
+    Quiz2Component,
+    QuizzesComponent,
+    QuizTestComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,8 @@ import { Quiz2Component } from './component/quiz2/quiz2.component';
     MatNativeDateModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DragDropModule
 
   ],
   providers: [],

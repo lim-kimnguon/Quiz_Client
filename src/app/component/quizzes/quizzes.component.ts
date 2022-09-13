@@ -1,14 +1,16 @@
+import { interval } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Quiz } from 'src/app/interface/quiz';
 import { ApiService } from 'src/app/service/api.service';
 import * as $ from "jquery";
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-quiz',
-  templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.css']
+  selector: 'app-quizzes',
+  templateUrl: './quizzes.component.html',
+  styleUrls: ['./quizzes.component.css']
 })
-export class QuizComponent implements OnInit {
+export class QuizzesComponent implements OnInit {
 
   answer = 0;
   quiz !: Quiz;
@@ -24,59 +26,66 @@ export class QuizComponent implements OnInit {
   question_answers: any = [];
   old_question : boolean = false;
   timeOut : number = 10;
-  quizType!: string;
+  hour !: number;
+  minutes !: number;
 
-  total_time : number = 120; // (in minutes)
+  new_question!: string;
+  test_question !: [];
+
+  display : any;
+  interval : any;
+  quizTime: any;
+  totalTimeInMinutes : number = 120; // (in minutes)
   // var hour = Math.floor(totalTimeInMinutes / 60); //1h
   // var minutes = totalTimeInMinutes - (hour * 60); //30m
 
 
-  times: number = 125;
-  interval : any;
+  // questions : string = "This is [a] that I [b] almost [c] in my *.";
+
+
+  gap_answers : any = [
+    {name: "things", order: 1},
+    {name: "do", order: 2},
+    {name: "everyday", order: 3},
+    {name: "life", order: 4},
+    {name: "test", order: 5},
+  ];
+  blanks : any = [
+    {name: "Answer 1", order: 1},
+    {name: "Answer 2", order: 2},
+    {name: "Answer 3", order: 3},
+    {name: "Answer 4", order: 4},
+    {name: "Answer 5", order: 5},
+  ]
 
   constructor(
     private api : ApiService,
   ) { }
 
+  // questions : string = "This is ____ that I ____ almost ____ in my ____.";
+  questions : string = "This is * that I * almost * in my *.";
 
   ngOnInit(): void {
+    this.new_question = this.questions.replace(/\*/gi, `
+      <span
+        cdkDropList
+        [cdkDropListData]="done"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+      </span>
+
+      <span class="example-box" *ngFor="let item of done" cdkDrag>_______</span>
+    `);
+
 
     this.getQuiz();
     $(".submit").hide();
-    // console.log();
+    this.hour = Math.floor(this.totalTimeInMinutes / 60); //1h
+    let hours = this.hour;
+    this.minutes = this.totalTimeInMinutes - (hours * 60); //30m
+    this.display=this.transform( this.totalTimeInMinutes)
+    console.log(this.transform( this.totalTimeInMinutes));
 
-
-  }
-
-  startTimer() {
-    console.log("=====>");
-    this.interval = setInterval(() => {
-      if (this.time === 0) {
-        this.time++;
-      } else {
-        this.time++;
-      }
-    }, 1000);
-  }
-
-  transform(value: number, args?: any): string | any {
-
-    const hours: number = Math.floor(value / 60);
-    const minutes: number = (value - hours * 60);
-    // const seconds: number = minutes * 60;
-
-    if (hours < 10 && minutes < 10) {
-        return '0' + hours + ':0' + (value - hours * 60);
-    }
-    if (hours > 10 && minutes > 10) {
-        return '0' + hours + ':' + (value - hours * 60);
-    }
-    if (hours > 10 && minutes < 10) {
-        return hours + ':0' + (value - hours * 60);
-    }
-    if (minutes > 10) {
-        return '0' + hours + ':' + (value - hours * 60);
-    }
   }
 
   getQuiz() {
@@ -84,14 +93,10 @@ export class QuizComponent implements OnInit {
       next: (data) => {
         clearInterval(this.counter);
 
-        this.startTimer()
         this.delayTime(2);
         this.startCounter();
         this.quiz = data;
-        console.log(this.quiz.questions[this.current_question].questionType.name);
         this.quizTitle = this.quiz.name;
-        // console.log(data.questions[this.current_question].questionType.name);
-
         console.log(this.quiz.questions);
 
         this.questionList = this.quiz.questions;
@@ -100,6 +105,41 @@ export class QuizComponent implements OnInit {
         });
       }
     })
+  }
+
+  details() {
+
+    for(let i=0; i<this.blanks.length; i++) {
+      if(this.blanks[i].order == i+1) {
+        console.log(this.blanks[i].order);
+      }
+    }
+  }
+
+  startTimer() {
+    this.interval = () => {
+      this.totalTimeInMinutes--;
+
+      if(this.totalTimeInMinutes == 0) {
+        console.log("On Time");
+
+      }
+    }
+
+    this.quizTime = setInterval(interval, 1000);
+  }
+
+  transform(value: number): string {
+    var sec_num = value;
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    // if (hours   < 10) {hours   = 0;}
+    // if (minutes < 10) {minutes = 0;}
+    // if (seconds < 10) {seconds = 0;}
+
+    return hours+':'+minutes+':'+seconds;
   }
 
   nextQuestion() {
@@ -244,6 +284,61 @@ export class QuizComponent implements OnInit {
   delayTime(delay: number) {
     setTimeout(() => {
     }, delay*1000);
+  }
+
+
+  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+
+  done = ['Hello'];
+
+  Array_data = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+  String_data = "";
+
+
+  drop(event: CdkDragDrop<string[]>) {
+    // this.test_question
+
+    if(event.container.data.length == 1){
+      return // this will stop item from drop
+     }
+
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
+
+
+
+  // onDropArray(event: CdkDragDrop<any>) {
+  //   if(event.previousContainer === event.container) {
+  //     this.moveItem(event.container.data);
+  //   } else {
+  //     this.transferItem(event.previousContainer.data, event.container.data);
+  //   }
+  // }
+
+  onDropString(event: CdkDragDrop<any>) {
+    if(event.previousContainer === event.container) {
+      this.moveItem(event.container.data);
+    } else {
+      this.transferItem(event.previousContainer.data, event.container.data);
+    }
+  }
+
+  moveItem(container_data : any) {
+
+
+  }
+
+  transferItem(previousContainer_data: any, container_data: any) {
+
   }
 
 }
